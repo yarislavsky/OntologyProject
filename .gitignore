@@ -1,0 +1,7 @@
+SparqlCaller/packages/*
+SparqlCaller/Entities/obj/*
+SparqlCaller/SparqlCaller/bin/*
+SparqlCaller/SparqlCaller/obj/*
+SparqlCaller/TestApp/bin/*
+SparqlCaller/TestApp/obj/*
+SparqlCaller/.vs/SparqlCaller/v14/.suo
