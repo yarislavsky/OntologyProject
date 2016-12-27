@@ -57,7 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Consts.cs" />
+    <Compile Include="Common\ConversionUtil.cs" />
+    <Compile Include="Common\FilterType.cs" />
     <Compile Include="Common\Helpers.cs" />
+    <Compile Include="Common\QueryBuilder.cs" />
+    <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\EntityFactory.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\City.cs" />

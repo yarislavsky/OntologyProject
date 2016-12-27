@@ -18,6 +18,7 @@ namespace TestApp
             {
                 var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, Queries.Templates.AllMoviesWithDbpediaLinks);
 
+
                 foreach(Movie movie in allMovies)
                 {
                     Console.WriteLine($"{movie.Title}\t{movie.Subject}\t{movie.Link}");
