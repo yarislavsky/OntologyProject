@@ -15,12 +15,26 @@ namespace SparqlCaller.Common
             InitializeDictionary();
         }
 
-        public static void CreateQuery(FilterType filterType, params string[] queryParameters)
+        public static string CreateQuery(FilterType filterType, string countryFilter = "",
+            string directorFilter = "", string dateFilter = "", string writerFilter = "", string genreFilter = "")
         {
-            if(queryParameters == null || queryParameters.Length == 0)
-                return;
-
             
+            string filterString = string.Empty;
+
+            if ((filterType & FilterType.Country) != 0)
+                filterString +=(string.Format(FilterDictionary[FilterType.Country], countryFilter));
+            if ((filterType & FilterType.Director) != 0)
+                filterString += (string.Format(FilterDictionary[FilterType.Director], directorFilter));
+            if ((filterType & FilterType.Date) != 0)
+                filterString += (string.Format(FilterDictionary[FilterType.Date], dateFilter));
+            if ((filterType & FilterType.Writer) != 0)
+                filterString += (string.Format(FilterDictionary[FilterType.Writer], writerFilter));
+            if ((filterType & FilterType.Genre) != 0)
+                filterString += (string.Format(FilterDictionary[FilterType.Genre], genreFilter));
+
+            var mainQuery = Queries.Templates.AllPrefixes + Queries.Templates.SelectBase + filterString + "} }";
+
+            return mainQuery;
         }
 
         private static void InitializeDictionary()

@@ -16,12 +16,12 @@ namespace TestApp
         {
             try
             {
-                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, Queries.Templates.AllMoviesWithDbpediaLinks);
+                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(FilterType.Date,dateFilter:"1992"));
 
-
-                foreach(Movie movie in allMovies)
+                Console.WriteLine("Title\tSubject\tLink\tGenre\tDate\tDirector\tWriter");
+                foreach (Movie movie in allMovies)
                 {
-                    Console.WriteLine($"{movie.Title}\t{movie.Subject}\t{movie.Link}");
+                    Console.WriteLine($"{movie.Title}\t{movie.Subject}\t{movie.Link}\t{movie.Genre}\t{movie.DateTime}\t{movie.Director}\t{movie.Writer}");
                 }
 
             }

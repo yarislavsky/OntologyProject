@@ -10,5 +10,6 @@ namespace SparqlCaller.Common
         Writer = 1<<2,
         Director = 1<<3,
         Country = 1<<4,
+        All = Genre | Date | Writer | Director | Country,
     }
 }

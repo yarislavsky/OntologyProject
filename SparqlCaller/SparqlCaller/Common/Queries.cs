@@ -101,41 +101,59 @@ namespace SparqlCaller.Common
                                                                   SERVICE <http://data.linkedmdb.org/sparql> { 
                                                                           ?movie rdf:type movie:film;
     		                                                                rdfs:label ?title.
-                                                                            {0}
+                                                                            {0} }
                                                                 ";
+
+            public const string AllPrefixes = @"PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                                                                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+                                                                PREFIX dbo: <http://dbpedia.org/ontology/>
+                                                                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                                                                PREFIX yago: <http://yago-knowledge.org/resource/>
+                                                                PREFIX dbpediaowl: <http://dbpedia.org/ontology/>
+                                                                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                                                PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+                                                                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                                                                PREFIX dc: <http://purl.org/dc/elements/1.1/>";
+
+            public const string SelectBase = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName
+                                                                        WHERE { SERVICE <http://data.linkedmdb.org/sparql> { 
+                                                                          ?movie rdf:type movie:film;
+    		                                                                rdfs:label ?label.";
+
+
         }
 
         public class FilterSnippets
         {
-            public const string GenreFilter = @"OPTIONAL	{
-                                                                      ? movie movie:genre? genre.
-     			                                                                ?genre movie:film_genre_name? genreName.
+            public const string GenreFilter = @"
+                                                                      ?movie movie:genre ?genre.
+     			                                                                ?genre movie:film_genre_name ?genreName.
                                                                        FILTER(REGEX(?genreName,'{0}','i'))
-                                                                   }";
+                                                                   ";
 
-            public const string DateFilter = @"OPTIONAL	{
+            public const string DateFilter = @"
     	                                                                ?movie movie:initial_release_date ?date.
                                                                         FILTER(REGEX(?date,'{0}','i'))
-                                                                        }";
+                                                                        ";
 
-            public const string WriterFilter = @" OPTIONAL	{
+            public const string WriterFilter = @"
     	                                                                ?movie movie:writer ?writer.
       	                                                                ?writer movie:writer_name ?writerName.
                                                                         FILTER(REGEX(?writerName,'{0}','i'))
-                                                                    }";
+                                                                    ";
 
             public const string DirectorFilter =
-                                            @" OPTIONAL	{
+                                            @"
     	                                                                ?movie movie:director ?director.
       	                                                                ?director movie:director_name ?directorName.
                                                                         FILTER(REGEX(?directorName,'{0}','i'))
-                                                                    }";
+                                                                    ";
 
-            public const string CountryFilter = @"  OPTIONAL {
+            public const string CountryFilter = @"
     	                                                                ?movie movie:country ?country.
       	                                                                ?country movie:country_name ?countryName.
                                                                         FILTER(REGEX(?country,'{0}','i'))
-                                                                    }";
+                                                                    ";
 
 
         }
