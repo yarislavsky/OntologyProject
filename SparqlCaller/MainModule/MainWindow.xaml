@@ -1,0 +1,152 @@
+﻿<dxr:DXRibbonWindow x:Class="MainModule.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        Title="MainWindow" Height="450" Width="725">
+    <Grid DataContext="{Binding Main, Source={StaticResource Locator}}">
+        <Grid.Resources>
+            <Style x:Key="CommonGroupStyle" TargetType="{x:Type FrameworkElement}">
+                <Style.Setters>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </Style.Setters>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxr:RibbonControl Grid.Row="0" RibbonStyle="Office2010" >
+            <dxr:RibbonControl.ToolbarItems>
+                <dxb:BarButtonItemLink BarItemName="newItem"/>
+            </dxr:RibbonControl.ToolbarItems>
+            <dxr:RibbonDefaultPageCategory>
+                <dxr:RibbonPage Caption="Home">
+                    <dxr:RibbonPageGroup Caption="File">
+                        <dxb:BarButtonItem x:Name="newItem" Content="New" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}"/>
+                        <dxb:BarItemSeparator/>
+                        <dxr:BarButtonGroup x:Name="editorGroup">
+                            <dxb:BarEditItem x:Name="editItem" EditSettings="{dxe:ComboBoxSettings}" EditWidth="80"/>
+                        </dxr:BarButtonGroup>
+                        <dxr:BarButtonGroup x:Name="alignmentGroup">
+                            <dxb:BarCheckItem x:Name="leftCheckItem" Content="Align Left" Glyph="{dx:DXImage Image=AlignLeft_16x16.png}" GroupIndex="1" IsChecked="True"/>
+                            <dxb:BarCheckItem x:Name="rightCheckItem" Content="Align Right" Glyph="{dx:DXImage Image=AlignRight_16x16.png}" GroupIndex="1"/>
+                            <dxb:BarCheckItem x:Name="justifyCheckItem" Content="Align Justify" Glyph="{dx:DXImage Image=AlignJustify_16x16.png}" GroupIndex="1"/>
+                        </dxr:BarButtonGroup>
+                        <dxb:BarItemSeparator/>
+                        <dxb:BarButtonItem x:Name="saveAsItem" Content="Save As" LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <dx:DXExpander Grid.Column="0" VerticalExpand="None" HorizontalExpand="FromLeftToRight">
+                <dx:DXExpander.Style>
+                    <Style TargetType="{x:Type dx:DXExpander}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ExpandButton, Path=IsChecked}" Value="True">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=ExpandButton, Path=IsChecked}" Value="False">
+                                <Setter Property="IsExpanded" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dx:DXExpander.Style>
+                <GroupBox Header="Book Filters" Margin="5">
+                    <StackPanel>
+                        <CheckBox x:Name="GenreCheck" IsChecked="{Binding IsGenreChecked}" Content="Genre"/>
+                            <ComboBox >
+                            <ComboBox.Style>
+                                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource CommonGroupStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=GenreCheck, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ComboBox.Style>
+                            </ComboBox>
+                        
+                        <CheckBox Content="Date" x:Name="DateCheck"/>
+                        <dxe:DateEdit>
+                            <dxe:DateEdit.Style>
+                                <Style BasedOn="{StaticResource CommonGroupStyle}" TargetType="{x:Type dxe:DateEdit}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=DateCheck, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </dxe:DateEdit.Style>
+                        </dxe:DateEdit>
+                        
+                        <CheckBox Content="Writer" x:Name="WriterCheck"/>
+                        <TextBox >
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=WriterCheck, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <CheckBox Content="Director" x:Name="DirectorCheck"/>
+                        <TextBox>
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=DirectorCheck, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <CheckBox Content="Country" x:Name="CountryCheck"/>
+                        <TextBox>
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=CountryCheck, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </StackPanel>
+                    
+                    
+                </GroupBox>
+            </dx:DXExpander>
+            <ToggleButton x:Name="ExpandButton" Width="30" IsChecked="True" Grid.Column="1" HorizontalContentAlignment="Left">
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Content" Value="&lt;&lt;"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Content" Value="&gt;&gt;"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+        </Grid>
+        <dxr:RibbonStatusBarControl Grid.Row="2">
+            <dxr:RibbonStatusBarControl.RightItems>
+                <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
+            </dxr:RibbonStatusBarControl.RightItems>
+        </dxr:RibbonStatusBarControl>
+    </Grid>
+</dxr:DXRibbonWindow>

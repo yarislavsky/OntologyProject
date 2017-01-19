@@ -5,3 +5,6 @@ SparqlCaller/SparqlCaller/obj/*
 SparqlCaller/TestApp/bin/*
 SparqlCaller/TestApp/obj/*
 SparqlCaller/.vs/SparqlCaller/v14/.suo
+SparqlCaller/MainModule/obj/
+SparqlCaller/MainModule/bin/Debug/MainModule.vshost.exe.manifest
+SparqlCaller/MainModule/bin/Debug/

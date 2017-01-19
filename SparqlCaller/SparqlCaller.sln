@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparqlCaller", "SparqlCalle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{F61A16EC-34CB-4791-8FBD-E9C65EC93CCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainModule", "MainModule\MainModule.csproj", "{5EB4E95A-7B2F-4C2A-BF77-6F1001CAC43D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F61A16EC-34CB-4791-8FBD-E9C65EC93CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61A16EC-34CB-4791-8FBD-E9C65EC93CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61A16EC-34CB-4791-8FBD-E9C65EC93CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EB4E95A-7B2F-4C2A-BF77-6F1001CAC43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB4E95A-7B2F-4C2A-BF77-6F1001CAC43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB4E95A-7B2F-4C2A-BF77-6F1001CAC43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB4E95A-7B2F-4C2A-BF77-6F1001CAC43D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
