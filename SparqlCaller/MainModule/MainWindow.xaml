@@ -5,6 +5,7 @@
         xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
         xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
         Title="MainWindow" Height="450" Width="725">
     <Grid DataContext="{Binding Main, Source={StaticResource Locator}}">
         <Grid.Resources>
@@ -146,6 +147,23 @@
                     </Style>
                 </ToggleButton.Style>
             </ToggleButton>
+            <dxg:GridControl Grid.Column="2" ItemsSource="{Binding Items}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Name" FieldName="Name"/>
+                    <dxg:GridColumn Header="Genre" FieldName="Genre"/>
+                    <dxg:GridColumn Header="Writer" FieldName="Writer"/>
+                    <dxg:GridColumn Header="Director" FieldName="Director"/>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:CardView AllowEditing="False" NavigationStyle="Cell" >
+                        <dxg:CardView.CardHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Data.Name}"/>
+                            </DataTemplate>
+                        </dxg:CardView.CardHeaderTemplate>
+                    </dxg:CardView>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
         </Grid>
         <dxr:RibbonStatusBarControl Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>

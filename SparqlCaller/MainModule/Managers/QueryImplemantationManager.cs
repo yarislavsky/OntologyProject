@@ -1,4 +1,7 @@
-﻿using MainModule.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MainModule.Models;
+using MainModule.ViewModel;
 using SparqlCaller;
 using SparqlCaller.Common;
 using SparqlCaller.Entities;
@@ -7,6 +10,10 @@ namespace MainModule.Managers
 {
     public class QueryImplemantationManager
     {
+        private IEnumerable<ItemViewModel> _movieList = new List<ItemViewModel>();
+
+        public IEnumerable<ItemViewModel> MovieList => _movieList; 
+
         public void ImplementQuery(QueryParameters queryParameters)
         {
             FilterType filterType = 0;
@@ -21,7 +28,15 @@ namespace MainModule.Managers
             if (queryParameters.IsWriterChecked)
                 filterType |= FilterType.Writer;
 
-            var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(filterType));
+            var allMovies =
+                SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(filterType)).ToList();
+
+            var movieList = new List<ItemViewModel>();
+            foreach (var movie in allMovies)
+            {
+                movieList.Add(new ItemViewModel(movie as Movie));
+            }
+            _movieList = movieList;
         }
     }
 }

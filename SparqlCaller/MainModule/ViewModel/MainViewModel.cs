@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.XtraPrinting.Export.Imaging;
@@ -21,6 +24,7 @@ namespace MainModule.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ObservableCollection<ItemViewModel> _items; 
         private bool _isGenreChecked;
         private bool _isDateChecked;
         private bool _isWriterChecked;
@@ -120,6 +124,12 @@ namespace MainModule.ViewModel
 
         public ICommand RunQueryCommand => _runQueryCommand ?? (_runQueryCommand = new DelegateCommand(OnRunQuery));
 
+        public ObservableCollection<ItemViewModel> Items
+        {
+            get { return _items; }
+            set { _items = value; }
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -139,6 +149,24 @@ namespace MainModule.ViewModel
         private void InitializeSettings()
         {
             _queryRunnerManager = new QueryRunnerManager();
+            SubscribeToManagerEvents();
+            _items = new ObservableCollection<ItemViewModel>();
+        }
+
+        private void SubscribeToManagerEvents()
+        {
+            if (_queryRunnerManager != null)
+                _queryRunnerManager.ProcessFinished += ManagerProcessFinished;
+
+        }
+
+        private void ManagerProcessFinished(IEnumerable<ItemViewModel> obj)
+        {
+            var itemList = obj.ToList();
+            foreach (var itemViewModel in itemList)
+            {
+                Items.Add(itemViewModel);
+            }
         }
 
         private void OnRunQuery()

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using MainModule.Models;
+using MainModule.ViewModel;
 
 namespace MainModule.Managers
 {
@@ -16,6 +18,8 @@ namespace MainModule.Managers
 
             SubscribeToBackgroundWorkerEvents();
         }
+
+        public event Action<IEnumerable<ItemViewModel>> ProcessFinished; 
 
         public void RunWorker(QueryParameters queryParameters)
         {
@@ -51,7 +55,8 @@ namespace MainModule.Managers
 
         private void BackgroundRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            var movieList = _queryImplemantationManager.MovieList;
+            ProcessFinished?.Invoke(movieList);
         }
     }
 }
