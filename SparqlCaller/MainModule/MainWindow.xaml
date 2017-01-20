@@ -26,7 +26,8 @@
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage Caption="Home">
                     <dxr:RibbonPageGroup Caption="File">
-                        <dxb:BarButtonItem x:Name="newItem" Content="New" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}"/>
+                        <dxb:BarButtonItem x:Name="newItem" Content="Run Query" Glyph="{dx:DXImage Image=Play_16x16.png}" LargeGlyph="{dx:DXImage Image=Play_32x32.png}"
+                                           Command="{Binding RunQueryCommand}"/>
                         <dxb:BarItemSeparator/>
                         <dxr:BarButtonGroup x:Name="editorGroup">
                             <dxb:BarEditItem x:Name="editItem" EditSettings="{dxe:ComboBoxSettings}" EditWidth="80"/>
@@ -64,7 +65,7 @@
                 <GroupBox Header="Book Filters" Margin="5">
                     <StackPanel>
                         <CheckBox x:Name="GenreCheck" IsChecked="{Binding IsGenreChecked}" Content="Genre"/>
-                            <ComboBox >
+                            <ComboBox SelectedItem="{Binding SelectedGenre}">
                             <ComboBox.Style>
                                 <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -76,8 +77,11 @@
                             </ComboBox.Style>
                             </ComboBox>
                         
-                        <CheckBox Content="Date" x:Name="DateCheck"/>
-                        <dxe:DateEdit>
+                        <CheckBox Content="Date" x:Name="DateCheck" IsChecked="{Binding IsDateChecked}"/>
+                        <dxe:DateEdit MaskUseAsDisplayFormat="True" Mask ="yyyy">
+                            <dxe:DateEdit.StyleSettings>
+                                <dxe:DateEditPickerStyleSettings/>
+                            </dxe:DateEdit.StyleSettings>
                             <dxe:DateEdit.Style>
                                 <Style BasedOn="{StaticResource CommonGroupStyle}" TargetType="{x:Type dxe:DateEdit}">
                                     <Style.Triggers>
@@ -89,8 +93,8 @@
                             </dxe:DateEdit.Style>
                         </dxe:DateEdit>
                         
-                        <CheckBox Content="Writer" x:Name="WriterCheck"/>
-                        <TextBox >
+                        <CheckBox Content="Writer" x:Name="WriterCheck" IsChecked="{Binding IsWriterChecked}"/>
+                        <TextBox Text="{Binding WriterName}">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -101,8 +105,8 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <CheckBox Content="Director" x:Name="DirectorCheck"/>
-                        <TextBox>
+                        <CheckBox Content="Director" x:Name="DirectorCheck" IsChecked="{Binding IsDirectorChecked}"/>
+                        <TextBox Text="{Binding DirectorName}">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -113,7 +117,7 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <CheckBox Content="Country" x:Name="CountryCheck"/>
+                        <CheckBox Content="Country" x:Name="CountryCheck" IsChecked="{Binding IsCountryChecked}"/>
                         <TextBox>
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
