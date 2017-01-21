@@ -162,6 +162,17 @@
                     </Style>
                 </ToggleButton.Style>
             </ToggleButton>
+<!--
+            <dx:WaitIndicator Content="Loading..." >
+                <dx:WaitIndicator.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Please Wait" FontSize="20"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dx:WaitIndicator.ContentTemplate>
+            </dx:WaitIndicator>
+-->
             <dxg:GridControl Grid.Column="2" ItemsSource="{Binding Items}">
                 <dxg:GridControl.Columns>
 
