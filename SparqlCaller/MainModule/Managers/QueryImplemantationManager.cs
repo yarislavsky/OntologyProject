@@ -30,7 +30,8 @@ namespace MainModule.Managers
 
             var allMovies =
                 SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia
-                    , QueryBuilder.CreateQuery(filterType
+                    , QueryBuilder.CreateQuery(Consts.URL.DbPedia
+                        , filterType
                         , queryParameters.RowLimit
                         , queryParameters.Country
                         , queryParameters.DirectorName

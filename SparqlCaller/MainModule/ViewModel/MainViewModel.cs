@@ -248,7 +248,7 @@ namespace MainModule.ViewModel
                 WriterName = WriterName,
                 Country = Country,
                 Date = Date,
-                Genre = Defaults.AllGenres.ContainsKey(SelectedGenre)
+                Genre = !string.IsNullOrEmpty(SelectedGenre) && Defaults.AllGenres.ContainsKey(SelectedGenre)
                         ? Defaults.AllGenres[SelectedGenre]
                         : String.Empty,
                 RowLimit = int.TryParse(RowLimit, out rowLimit)

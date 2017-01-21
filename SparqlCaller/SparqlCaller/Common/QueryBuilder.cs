@@ -18,7 +18,7 @@ namespace SparqlCaller.Common
             InitializeDbpDictionary();
         }
 
-        public static string CreateQuery(string sourceType, FilterType filterType, string countryFilter = "",
+        public static string CreateQuery(string sourceType, FilterType filterType,
             int? rowLimit,
             string countryFilter = "",
             string directorFilter = "",
@@ -45,7 +45,8 @@ namespace SparqlCaller.Common
                     throw new NotImplementedException();
             }
 
-            var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } LIMIT 100" ;
+            var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } "
+                            + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
 
             return mainQuery;
         }
