@@ -12,7 +12,9 @@ namespace MainModule.ViewModel
         private string _name;
         private string _genre;
         private string _writer;
+        private string _date;
         private string _director;
+        private string _imgUrl;
 
         #endregion
 
@@ -26,11 +28,39 @@ namespace MainModule.ViewModel
             Genre = movie.Genre;
             Writer = movie.Writer;
             Director = movie.Director;
+            ImgUrl = string.IsNullOrEmpty(movie.ImgUrl)
+                ? Defaults.DefaultImage
+                : movie.ImgUrl;
+            Date = movie.DateTime?.ToShortDateString() ?? string.Empty;
         }
 
         #endregion
 
         #region properties
+
+        public string ImgUrl
+        {
+            get { return _imgUrl; }
+            set
+            {
+                if (_imgUrl == value)
+                    return;
+                _imgUrl = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Date
+        {
+            get { return _date; }
+            set
+            {
+                if (_date == value)
+                    return;
+                _date = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Name
         {

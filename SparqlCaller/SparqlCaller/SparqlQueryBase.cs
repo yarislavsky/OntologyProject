@@ -17,7 +17,7 @@ namespace SparqlCaller
         public static List<IEntity> GetEntities<T>(string url, string queryString) where T : IEntity
         {
             return RunQuery(url, queryString)
-                .Select(result => EntityFactory.GetEntity<T>(result))
+                .Select(EntityFactory.GetEntity<T>)
                 .ToList();
         }
 

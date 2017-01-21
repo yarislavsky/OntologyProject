@@ -27,12 +27,17 @@
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage Caption="Home">
                     <dxr:RibbonPageGroup Caption="File">
-                        <dxb:BarButtonItem x:Name="newItem" Content="Run Query" Glyph="{dx:DXImage Image=Play_16x16.png}" LargeGlyph="{dx:DXImage Image=Play_32x32.png}"
+                        <dxb:BarButtonItem x:Name="newItem" Content="Run Query"
+                                Glyph="{dx:DXImage Image=Play_16x16.png}" LargeGlyph="{dx:DXImage Image=Play_32x32.png}"
                                            Command="{Binding RunQueryCommand}"/>
                         <dxb:BarItemSeparator/>
-                        <dxr:BarButtonGroup x:Name="editorGroup">
-                            <dxb:BarEditItem x:Name="editItem" EditSettings="{dxe:ComboBoxSettings}" EditWidth="80"/>
-                        </dxr:BarButtonGroup>
+                   <!--     <dxr:BarButtonGroup x:Name="editorGroup">
+                           <dxb:BarEditItem x:Name="editItem"
+                                EditSettings="{dxe:ComboBoxSettings }"
+                                EditWidth="80"
+                                InputBindings="{Binding AllRowLimits}"
+                                Content="{Binding RowLimit}" />
+                        </dxr:BarButtonGroup> -->
                         <dxr:BarButtonGroup x:Name="alignmentGroup">
                             <dxb:BarCheckItem x:Name="leftCheckItem" Content="Align Left" Glyph="{dx:DXImage Image=AlignLeft_16x16.png}" GroupIndex="1" IsChecked="True"/>
                             <dxb:BarCheckItem x:Name="rightCheckItem" Content="Align Right" Glyph="{dx:DXImage Image=AlignRight_16x16.png}" GroupIndex="1"/>
@@ -65,8 +70,18 @@
                 </dx:DXExpander.Style>
                 <GroupBox Header="Book Filters" Margin="5">
                     <StackPanel>
+
+                        <Label>Items limit</Label>
+                        <ComboBox SelectedItem="{Binding RowLimit}" ItemsSource="{Binding AllRowLimits}">
+                            <ComboBox.Style>
+                                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource CommonGroupStyle}">
+                                </Style>
+                            </ComboBox.Style>
+                        </ComboBox>
+                        <Label></Label>
+
                         <CheckBox x:Name="GenreCheck" IsChecked="{Binding IsGenreChecked}" Content="Genre"/>
-                            <ComboBox SelectedItem="{Binding SelectedGenre}">
+                            <ComboBox SelectedItem="{Binding SelectedGenre}" ItemsSource="{Binding AllGenres}">
                             <ComboBox.Style>
                                 <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -79,7 +94,7 @@
                             </ComboBox>
                         
                         <CheckBox Content="Date" x:Name="DateCheck" IsChecked="{Binding IsDateChecked}"/>
-                        <dxe:DateEdit MaskUseAsDisplayFormat="True" Mask ="yyyy">
+                        <dxe:DateEdit MaskUseAsDisplayFormat="True" Mask ="yyyy" Text="{Binding Date}">
                             <dxe:DateEdit.StyleSettings>
                                 <dxe:DateEditPickerStyleSettings/>
                             </dxe:DateEdit.StyleSettings>
@@ -119,7 +134,7 @@
                             </TextBox.Style>
                         </TextBox>
                         <CheckBox Content="Country" x:Name="CountryCheck" IsChecked="{Binding IsCountryChecked}"/>
-                        <TextBox>
+                        <TextBox  Text="{Binding Country}">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -149,19 +164,53 @@
             </ToggleButton>
             <dxg:GridControl Grid.Column="2" ItemsSource="{Binding Items}">
                 <dxg:GridControl.Columns>
+
+<!--
+                    <dxg:GridColumn FieldName="ImgUrl" IsSmart="True" VisibleIndex="0">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ImageEditSettings Stretch="UniformToFill"/>
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.CellStyle>
+                            <Style TargetType="dxg:CellContentPresenter">
+                                <Setter Property="Width" Value="50"/>
+                                <Setter Property="Height" Value="50"/>
+                            </Style>
+                        </dxg:GridColumn.CellStyle>
+                    </dxg:GridColumn>
+-->
                     <dxg:GridColumn Header="Name" FieldName="Name"/>
                     <dxg:GridColumn Header="Genre" FieldName="Genre"/>
                     <dxg:GridColumn Header="Writer" FieldName="Writer"/>
                     <dxg:GridColumn Header="Director" FieldName="Director"/>
+                    <dxg:GridColumn Header="Date" FieldName="Date"/>
                 </dxg:GridControl.Columns>
                 <dxg:GridControl.View>
-                    <dxg:CardView AllowEditing="False" NavigationStyle="Cell" >
+                    <!-- <dxg:CardView AllowEditing="False" NavigationStyle="Cell" >
                         <dxg:CardView.CardHeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Data.Name}"/>
                             </DataTemplate>
                         </dxg:CardView.CardHeaderTemplate>
                     </dxg:CardView>
+                    -->
+                    <dxg:CardView AllowEditing="False" NavigationStyle="Cell"
+                                  ShowTotalSummary="False"
+                        ShowGroupPanel="False" SeparatorThickness="0"
+                        CardAlignment="Center" CardMargin="30,20,30,20" MaxCardCountInRow="1">
+                        <dxg:CardView.CardHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Data.Name}"/>
+                                    <Run Text="{Binding Data.Genre}"/>
+                                    <Run Text="{Binding Data.Writer}"/>
+                                    <Run Text="{Binding Data.Director}"/>
+                                    <Run Text="{Binding Data.Date}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </dxg:CardView.CardHeaderTemplate>
+                    </dxg:CardView>
+
+
                 </dxg:GridControl.View>
             </dxg:GridControl>
         </Grid>

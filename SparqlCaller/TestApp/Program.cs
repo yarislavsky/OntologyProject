@@ -4,6 +4,7 @@ using SparqlCaller.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,10 @@ namespace TestApp
         {
             try
             {
-                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(FilterType.Date,dateFilter:"1992"));
+                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia,
+                    QueryBuilder.CreateQuery(FilterType.Date,
+                        10,
+                        dateFilter:"1992"));
 
                 Console.WriteLine("Title\tSubject\tLink\tGenre\tDate\tDirector\tWriter");
                 foreach (Movie movie in allMovies)

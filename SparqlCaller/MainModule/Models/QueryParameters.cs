@@ -15,5 +15,13 @@
         public string WriterName { get; set; }
 
         public string DirectorName { get; set; }
+
+        public string Genre { get; set; }
+
+        public string Country { get; set; }
+
+        public string Date { get; set; }
+
+        public int? RowLimit { get; set; }
     }
 }

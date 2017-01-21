@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -33,10 +34,31 @@ namespace MainModule.ViewModel
 
         private string _writerName;
         private string _directorName;
+        private string _genre;
+        private string _country;
+        private string _date;
+
+        private string _rowLimit;
+
 
         private ICommand _runQueryCommand;
 
         private QueryRunnerManager _queryRunnerManager;
+
+        public string[] AllGenres => Defaults.AllGenres.Keys.ToArray();
+        public string[] AllRowLimits => Defaults.AllRowLimits;
+
+        public string RowLimit
+        {
+            get { return _rowLimit; }
+            set
+            {
+                if(_rowLimit == value)
+                    return;
+                _rowLimit = value;
+                RaisePropertyChanged(() => RowLimit);
+            }
+        }
 
         public bool IsGenreChecked
         {
@@ -122,6 +144,42 @@ namespace MainModule.ViewModel
             }
         }
 
+        public string SelectedGenre
+        {
+            get { return _genre; }
+            set
+            {
+                if(_genre == value)
+                    return;
+                _genre = value;
+                RaisePropertyChanged(() => SelectedGenre);
+            }
+        }
+
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                if(_country == value)
+                    return;
+                _country = value;
+                RaisePropertyChanged(() => Country);
+            }
+        }
+
+        public string Date
+        {
+            get { return _date; }
+            set
+            {
+                if(_date == value)
+                    return;
+                _date = value;
+                RaisePropertyChanged(() => Date);
+            }
+        }
+
         public ICommand RunQueryCommand => _runQueryCommand ?? (_runQueryCommand = new DelegateCommand(OnRunQuery));
 
         public ObservableCollection<ItemViewModel> Items
@@ -177,6 +235,8 @@ namespace MainModule.ViewModel
 
         private QueryParameters GetQueryParameters()
         {
+            int rowLimit;
+
             return new QueryParameters
             {
                 IsDateChecked = IsDateChecked,
@@ -186,6 +246,14 @@ namespace MainModule.ViewModel
                 IsGenreChecked = IsGenreChecked,
                 DirectorName = DirectorName,
                 WriterName = WriterName,
+                Country = Country,
+                Date = Date,
+                Genre = Defaults.AllGenres.ContainsKey(SelectedGenre)
+                        ? Defaults.AllGenres[SelectedGenre]
+                        : String.Empty,
+                RowLimit = int.TryParse(RowLimit, out rowLimit)
+                            ? (int?)rowLimit
+                            : null
             };
         }
     }

@@ -15,8 +15,13 @@ namespace SparqlCaller.Common
             InitializeDictionary();
         }
 
-        public static string CreateQuery(FilterType filterType, string countryFilter = "",
-            string directorFilter = "", string dateFilter = "", string writerFilter = "", string genreFilter = "")
+        public static string CreateQuery(FilterType filterType,
+            int? rowLimit,
+            string countryFilter = "",
+            string directorFilter = "",
+            string dateFilter = "",
+            string writerFilter = "",
+            string genreFilter = "")
         {
             
             string filterString = string.Empty;
@@ -32,7 +37,9 @@ namespace SparqlCaller.Common
             if ((filterType & FilterType.Genre) != 0)
                 filterString += (string.Format(FilterDictionary[FilterType.Genre], genreFilter));
 
-            var mainQuery = Queries.Templates.AllPrefixes + Queries.Templates.SelectBase + filterString + "} }";
+            var mainQuery = Queries.Templates.AllPrefixes + Queries.Templates.SelectBase
+                            + filterString + "} }"
+                            + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
 
             return mainQuery;
         }
