@@ -16,7 +16,7 @@ namespace TestApp
         {
             try
             {
-                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(FilterType.Date,dateFilter:"1992"));
+                var allMovies = SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(Consts.URL.DbPedia, FilterType.Date,dateFilter:"1992"));
 
                 Console.WriteLine("Title\tSubject\tLink\tGenre\tDate\tDirector\tWriter");
                 foreach (Movie movie in allMovies)

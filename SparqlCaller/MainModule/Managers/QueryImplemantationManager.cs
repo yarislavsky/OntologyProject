@@ -29,7 +29,7 @@ namespace MainModule.Managers
                 filterType |= FilterType.Writer;
 
             var allMovies =
-                SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(filterType)).ToList();
+                SparqlQueryBase.GetEntities<Movie>(Consts.URL.DbPedia, QueryBuilder.CreateQuery(Consts.URL.DbPedia,filterType)).ToList();
 
             var movieList = new List<ItemViewModel>();
             foreach (var movie in allMovies)

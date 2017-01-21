@@ -13,5 +13,7 @@ namespace SparqlCaller.Common
             public const string DbPedia = "http://dbpedia.org/sparql";
             public const string LinkedMdb = "http://data.linkedmdb.org/sparql";
         }
+
+        public const string Optional = "/Opt";
     }
 }
