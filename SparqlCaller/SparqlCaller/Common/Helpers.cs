@@ -12,7 +12,7 @@ namespace SparqlCaller.Common
         public static string GetValue(this SparqlResult sResult, string property)
         {
             return sResult.Any(res => res.Key == property)
-                ? sResult.FirstOrDefault(res => res.Key == property).Value.ToString()
+                ? sResult.FirstOrDefault(res => res.Key == property).Value?.ToString()
                 : string.Empty;
         }
     }

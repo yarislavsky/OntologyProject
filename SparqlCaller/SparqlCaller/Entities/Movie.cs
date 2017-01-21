@@ -27,10 +27,10 @@ namespace SparqlCaller.Entities
             Link = sResult.GetValue("film");
             Subject = sResult.GetValue("subject");
 
-            Genre = sResult.GetValue("genreName");
+            Genre = sResult.GetValue("genreName").RemoveLanguageLabel();
             DateTime = ConversionUtil.ConvertToDateTime(sResult.GetValue("date"));
-            Director = sResult.GetValue("directorName");
-            Writer = sResult.GetValue("writerName");
+            Director = sResult.GetValue("directorName").RemoveLanguageLabel();
+            Writer = sResult.GetValue("writerName").RemoveLanguageLabel();
 
             // TODO get img url from response
             ImgUrl = string.Empty;

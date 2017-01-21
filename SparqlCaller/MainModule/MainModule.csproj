@@ -89,6 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Defaults.cs" />
     <Compile Include="Managers\QueryImplemantationManager.cs" />
     <Compile Include="Managers\QueryRunnerManager.cs" />
     <Compile Include="Models\QueryParameters.cs" />
