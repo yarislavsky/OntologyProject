@@ -23,7 +23,7 @@ namespace SparqlCaller.Entities
 
         public IEntity FillEntity(SparqlResult sResult)
         {
-            Title = sResult.GetValue("label");
+            Title = sResult.GetValue("label").RemoveLanguageLabel();
             Link = sResult.GetValue("film");
             Subject = sResult.GetValue("subject");
 

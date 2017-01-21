@@ -113,14 +113,19 @@ namespace SparqlCaller.Common
                                                                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                                                                 PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
                                                                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                                                                PREFIX dc: <http://purl.org/dc/elements/1.1/>";
+                                                                PREFIX dc: <http://purl.org/dc/elements/1.1/>
+                                                                PREFIX dbp: <http://dbpedia.org/property/>";
 
             public const string SelectBase = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName
                                                                         WHERE { SERVICE <http://data.linkedmdb.org/sparql> { 
                                                                           ?movie rdf:type movie:film;
     		                                                                rdfs:label ?label.";
 
-
+            public const string SelectBaseDbPedia = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName
+                                                                        WHERE { SERVICE <http://dbpedia.org/sparql> { 
+                                                                          ?movie rdf:type dbo:Film;
+    		                                                                rdfs:label ?label.
+                                                                           FILTER langMatches( lang(?label), 'en' ).";
         }
 
         public class FilterSnippets
@@ -131,14 +136,30 @@ namespace SparqlCaller.Common
                                                                        FILTER(REGEX(?genreName,'{0}','i'))
                                                                    ";
 
+            public const string GenreFilterDbPedia = @"?movie dbp:genre ?genre.
+     			                                                                ?genre rdfs:label ?genreName.
+                                                                       FILTER(REGEX(?genreName,'{0}','i'))
+                                                                   ";
+
             public const string DateFilter = @"
-    	                                                                ?movie movie:initial_release_date ?date.
+                                                                        ? movie movie:initial_release_date ?date.
+                                                                        FILTER(REGEX(?date,'{0}','i'))
+                                                                        ";
+
+            public const string DateFilterDbPedia = @"
+                                                                         ? movie movie:initial_release_date ?date.
                                                                         FILTER(REGEX(?date,'{0}','i'))
                                                                         ";
 
             public const string WriterFilter = @"
     	                                                                ?movie movie:writer ?writer.
       	                                                                ?writer movie:writer_name ?writerName.
+                                                                        FILTER(REGEX(?writerName,'{0}','i'))
+                                                                    ";
+
+            public const string WriterFilterDbPedia = @"
+    	                                                                ?movie dbo:writer ?writer.
+      	                                                                ?writer rdfs:label ?writerName.
                                                                         FILTER(REGEX(?writerName,'{0}','i'))
                                                                     ";
 
@@ -149,13 +170,18 @@ namespace SparqlCaller.Common
                                                                         FILTER(REGEX(?directorName,'{0}','i'))
                                                                     ";
 
+            public const string DirectorFilterDbPedia = @"
+                                                                        ?movie dbo:director ?director.
+      	                                                                ?director rdfs:label ?directorName.
+                                                                        FILTER(REGEX(?directorName,'{0}','i'))";
+
             public const string CountryFilter = @"
     	                                                                ?movie movie:country ?country.
       	                                                                ?country movie:country_name ?countryName.
                                                                         FILTER(REGEX(?country,'{0}','i'))
                                                                     ";
 
-
+            public const string CountryFilterDbPedia = @"";
         }
     }
 }
