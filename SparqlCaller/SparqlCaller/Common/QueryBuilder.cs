@@ -55,24 +55,39 @@ namespace SparqlCaller.Common
         {
             string filterString = string.Empty;
             if ((filterType & FilterType.Country) != 0)
-                filterString += GetFormatedSnipped(dictionary[FilterType.Country], countryFilter); 
+                filterString += GetFormatedSnipped(dictionary[FilterType.Country], countryFilter);
+            else
+                filterString += GetFormatedSnipped(dictionary[FilterType.Country], Consts.Optional);
             if ((filterType & FilterType.Director) != 0)
                 filterString += GetFormatedSnipped(dictionary[FilterType.Director], directorFilter);
+            else
+                filterString += GetFormatedSnipped(dictionary[FilterType.Director], Consts.Optional);
             if ((filterType & FilterType.Date) != 0)
                 filterString += GetFormatedSnipped(dictionary[FilterType.Date], dateFilter);
+            else
+                filterString += GetFormatedSnipped(dictionary[FilterType.Date], Consts.Optional);
             if ((filterType & FilterType.Writer) != 0)
                 filterString += GetFormatedSnipped(dictionary[FilterType.Writer], writerFilter);
+            else
+                filterString += GetFormatedSnipped(dictionary[FilterType.Writer], Consts.Optional);
             if ((filterType & FilterType.Genre) != 0)
                 filterString += GetFormatedSnipped(dictionary[FilterType.Genre], genreFilter);
+            else
+                filterString += GetFormatedSnipped(dictionary[FilterType.Genre], Consts.Optional);
             return filterString;
         }
 
         private static string GetFormatedSnipped(string stringToFormat, string filterValue)
         {
-            var snipped = string.Format(stringToFormat, filterValue);
+            string snipped;
             if (filterValue == Consts.Optional)
             {
+                snipped = string.Format(stringToFormat, " ");
                 snipped = "OPTIONAL {" + snipped + "}";
+            }
+            else
+            {
+                snipped = string.Format(stringToFormat, filterValue);
             }
             return snipped;
         }

@@ -138,29 +138,30 @@ namespace SparqlCaller.Common
 
             public const string GenreFilterDbPedia = @"?movie dbp:genre ?genre.
      			                                                                ?genre rdfs:label ?genreName.
-                                                                       FILTER(REGEX(?genreName,'{0}','i'))
+                                                                       FILTER(REGEX(?genreName,'{0}','i')).                
                                                                    ";
 
             public const string DateFilter = @"
-                                                                        ? movie movie:initial_release_date ?date.
+                                                                        ?movie movie:initial_release_date ?date.
                                                                         FILTER(REGEX(?date,'{0}','i'))
                                                                         ";
 
             public const string DateFilterDbPedia = @"
-                                                                         ? movie movie:initial_release_date ?date.
+                                                                         ?movie movie:initial_release_date ?date.
                                                                         FILTER(REGEX(?date,'{0}','i'))
                                                                         ";
 
             public const string WriterFilter = @"
     	                                                                ?movie movie:writer ?writer.
       	                                                                ?writer movie:writer_name ?writerName.
-                                                                        FILTER(REGEX(?writerName,'{0}','i'))
+                                                                        FILTER(REGEX(?writerName,'{0}','i')).
                                                                     ";
 
             public const string WriterFilterDbPedia = @"
     	                                                                ?movie dbo:writer ?writer.
       	                                                                ?writer rdfs:label ?writerName.
-                                                                        FILTER(REGEX(?writerName,'{0}','i'))
+                                                                        FILTER(REGEX(?writerName,'{0}','i')).
+                                                                        FILTER langMatches( lang(?writerName), 'en' ).
                                                                     ";
 
             public const string DirectorFilter =
@@ -173,7 +174,8 @@ namespace SparqlCaller.Common
             public const string DirectorFilterDbPedia = @"
                                                                         ?movie dbo:director ?director.
       	                                                                ?director rdfs:label ?directorName.
-                                                                        FILTER(REGEX(?directorName,'{0}','i'))";
+                                                                        FILTER(REGEX(?directorName,'{0}','i')).
+                                                                        FILTER langMatches( lang(?directorName), 'en' ).";
 
             public const string CountryFilter = @"
     	                                                                ?movie movie:country ?country.
