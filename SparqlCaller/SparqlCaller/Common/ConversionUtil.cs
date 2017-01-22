@@ -10,11 +10,18 @@ namespace SparqlCaller.Common
         private static Regex regex = new Regex(@"\@[a-zA-Z]{2}$");
         private static Regex regexLanguage = new Regex(@"\@en$");
         private static Regex regexDigit = new Regex(@"(^[0-9,\.]+)\^\^");
+        private static Regex regexYear = new Regex(@"\((\d{4})");
 
         public static DateTime? ConvertToDateTime(string dateString)
         {
             DateTime dateTime;
-            return !DateTime.TryParse(dateString, out dateTime)?(DateTime?) null:dateTime;
+            if (dateString == null)
+                return null;
+            var match = regexYear.Match(dateString);
+            if (!match.Success)
+                return null;
+            var yearToParse = match.Groups[1].ToString();
+            return DateTime.ParseExact(yearToParse, "yyyy", CultureInfo.InvariantCulture);
         }
 
         public static double ConvertToDouble(string numString)

@@ -33,7 +33,7 @@ namespace MainModule.ViewModel
             ImgUrl = string.IsNullOrEmpty(movie.ImgUrl)
                 ? Defaults.DefaultImage
                 : movie.ImgUrl;
-            Date = movie.DateTime?.ToShortDateString() ?? string.Empty;
+            Date = movie.DateTime?.Year.ToString() ?? "NaN";
             Duration = movie.Duration;
             Budget = movie.Budget;
         }

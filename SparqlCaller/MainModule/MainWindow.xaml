@@ -6,7 +6,8 @@
         xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-        Title="MainWindow" Height="450" Width="725">
+        Icon="Resource/1485129028_filmreel.png"                    
+        Title="SPARQL movie explorer" Height="450" Width="725">
     <Grid DataContext="{Binding Main, Source={StaticResource Locator}}">
         <Grid.Resources>
             <Style x:Key="CommonGroupStyle" TargetType="{x:Type FrameworkElement}">
@@ -216,7 +217,11 @@
         </Grid>
         <dxr:RibbonStatusBarControl Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>
-                <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
+                <dxb:BarEditItem EditValue="Text" IsVisible="False">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:TrackBarEditSettings/>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
     </Grid>

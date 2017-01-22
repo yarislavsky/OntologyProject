@@ -35,7 +35,7 @@ namespace SparqlCaller.Entities
             Subject = sResult.GetValue("subject");
 
             Genre = sResult.GetValue("genreName").RemoveLanguageLabel();
-            DateTime = ConversionUtil.ConvertToDateTime(sResult.GetValue("date"));
+            DateTime = ConversionUtil.ConvertToDateTime(sResult.GetValue("label"));
             Director = sResult.GetValue("directorName").RemoveLanguageLabel();
             Writer = sResult.GetValue("writerName").RemoveLanguageLabel();
             Duration = ConversionUtil.ConvertToDouble(sResult.GetValue("duration"));

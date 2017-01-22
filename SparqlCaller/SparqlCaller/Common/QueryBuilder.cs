@@ -48,7 +48,7 @@ namespace SparqlCaller.Common
             filterString = AddNonFilteredData(filterString);
 
             var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } "
-                            + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "") + " GROUP BY ?label";
+                            + " GROUP BY ?label " + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
 
             return mainQuery;
         }
