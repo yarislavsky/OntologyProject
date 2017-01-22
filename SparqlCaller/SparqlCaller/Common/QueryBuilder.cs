@@ -48,7 +48,7 @@ namespace SparqlCaller.Common
             filterString = AddNonFilteredData(filterString);
 
             var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } "
-                            + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
+                            + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "") + " GROUP BY ?label";
 
             return mainQuery;
         }
@@ -57,6 +57,7 @@ namespace SparqlCaller.Common
         {
             filterString += GetFormattedSnippedWithoutFilters(Queries.FilterSnippets.DurationFilterDbPedia);
             filterString += GetFormattedSnippedWithoutFilters(Queries.FilterSnippets.BudgetFilterDbPedia);
+            filterString += GetFormattedSnippedWithoutFilters(Queries.FilterSnippets.PictureFilterDbPedia);
             return filterString;
         }
 

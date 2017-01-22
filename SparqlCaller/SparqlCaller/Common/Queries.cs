@@ -121,7 +121,7 @@ namespace SparqlCaller.Common
                                                                           ?movie rdf:type movie:film;
     		                                                                rdfs:label ?label.";
 
-            public const string SelectBaseDbPedia = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName ?duration ?budget
+            public const string SelectBaseDbPedia = @"SELECT ?label (SAMPLE(?genreLabel) as ?genreName) (SAMPLE(?dateLabel) as ?date)  (SAMPLE(?writerLabel) as ?writerName)  (SAMPLE(?directorLabel) as ?directorName) (SAMPLE(?countryLabel) as ?countryName) (SAMPLE(?durationLabel) as ?duration) (SAMPLE(?budgetLabel) as ?budget)  (SAMPLE(?pictureLinkLabel) as ?pictureLink)
                                                                         WHERE { SERVICE <http://dbpedia.org/sparql> { 
                                                                           ?movie rdf:type dbo:Film;
     		                                                                rdfs:label ?label.
@@ -137,8 +137,8 @@ namespace SparqlCaller.Common
                                                                    ";
 
             public const string GenreFilterDbPedia = @"?movie dbp:genre ?genre.
-     			                                                                ?genre rdfs:label ?genreName.
-                                                                       FILTER(REGEX(?genreName,'{0}','i')).                                     
+     			                                                                ?genre rdfs:label ?genreLabel.
+                                                                       FILTER(REGEX(?genreLabel,'{0}','i')).                                     
                                                                    ";
 
             public const string DateFilter = @"
@@ -147,8 +147,8 @@ namespace SparqlCaller.Common
                                                                         ";
 
             public const string DateFilterDbPedia = @"
-                                                                         ?movie movie:initial_release_date ?date.
-                                                                        FILTER(REGEX(?date,'{0}','i'))
+                                                                         ?movie dbpediaowl:releaseDate ?dateLabel.
+                                                                        FILTER(REGEX(?dateLabel,'{0}','i'))
                                                                         ";
 
             public const string WriterFilter = @"
@@ -159,9 +159,9 @@ namespace SparqlCaller.Common
 
             public const string WriterFilterDbPedia = @"
     	                                                                ?movie dbo:writer ?writer.
-      	                                                                ?writer rdfs:label ?writerName.
-                                                                        FILTER(REGEX(?writerName,'{0}','i')).
-                                                                        FILTER langMatches( lang(?writerName), 'en' ).
+      	                                                                ?writer rdfs:label ?writerLabel.
+                                                                        FILTER(REGEX(?writerLabel,'{0}','i')).
+                                                                        FILTER langMatches( lang(?writerLabel), 'en' ).
                                                                     ";
 
             public const string DirectorFilter =
@@ -173,9 +173,9 @@ namespace SparqlCaller.Common
 
             public const string DirectorFilterDbPedia = @"
                                                                         ?movie dbo:director ?director.
-      	                                                                ?director rdfs:label ?directorName.
-                                                                        FILTER(REGEX(?directorName,'{0}','i')).
-                                                                        FILTER langMatches( lang(?directorName), 'en' ).";
+      	                                                                ?director rdfs:label ?directorLabel.
+                                                                        FILTER(REGEX(?directorLabel,'{0}','i')).
+                                                                        FILTER langMatches( lang(?directorLabel), 'en' ).";
 
             public const string CountryFilter = @"
     	                                                                ?movie movie:country ?country.
@@ -186,10 +186,12 @@ namespace SparqlCaller.Common
             public const string CountryFilterDbPedia = @"";
 
 
-            public const string DurationFilterDbPedia = @"               ?movie <http://dbpedia.org/ontology/Work/runtime> ?duration.
+            public const string DurationFilterDbPedia = @"               ?movie <http://dbpedia.org/ontology/Work/runtime> ?durationLabel.
                                                                             ";
 
-            public const string BudgetFilterDbPedia = @"                ?movie dbo:budget ?budget.";
+            public const string BudgetFilterDbPedia = @"                ?movie dbo:budget ?budgetLabel.";
+
+            public const string PictureFilterDbPedia = @"               ?movie foaf:depiction ?pictureLinkLabel.";
         }
     }
 }

@@ -21,13 +21,14 @@ namespace SparqlCaller.Entities
         public string Writer { get; set; }
         public string ImgUrl { get; set; }
         public double Duration { get; set; }
-
         public double Budget { get; set; }
 
         public IEntity FillEntity(SparqlResult sResult)
         {
             if (!sResult.GetValue("genreName").IsEnglish())
                 return null;
+            //if (string.IsNullOrEmpty(sResult.GetValue("pictureLink")))
+            //    return null;
 
             Title = sResult.GetValue("label").RemoveLanguageLabel();
             Link = sResult.GetValue("film");
@@ -40,8 +41,8 @@ namespace SparqlCaller.Entities
             Duration = ConversionUtil.ConvertToDouble(sResult.GetValue("duration"));
             Budget = ConversionUtil.ConvertToDouble(sResult.GetValue("budget"));
             // TODO get img url from response
-            ImgUrl = string.Empty;
-            
+            ImgUrl = sResult.GetValue("pictureLink");
+
             return this;
         }
     }
