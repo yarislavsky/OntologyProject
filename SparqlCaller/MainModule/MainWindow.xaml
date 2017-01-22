@@ -117,7 +117,7 @@
                         </dxe:DateEdit>
 
                         <CheckBox Content="Writer" x:Name="WriterCheck" IsChecked="{Binding IsWriterChecked}"/>
-                        <TextBox Text="{Binding WriterName}">
+                        <TextBox Text="{Binding WriterName, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
@@ -141,7 +141,7 @@
                             </TextBox.Style>
                         </TextBox>
                         <CheckBox Content="Country" x:Name="CountryCheck" IsChecked="{Binding IsCountryChecked}"/>
-                        <TextBox  Text="{Binding Country}">
+                        <TextBox  Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonGroupStyle}">
                                     <Style.Triggers>
