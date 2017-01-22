@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
@@ -40,9 +41,10 @@ namespace MainModule.ViewModel
         private string _date;
 
         private string _rowLimit;
-
+        private Visibility _isLoading;
 
         private ICommand _runQueryCommand;
+        private ICommand _cleanItemsCommand;
 
         private QueryRunnerManager _queryRunnerManager;
 
@@ -58,6 +60,18 @@ namespace MainModule.ViewModel
                     return;
                 _rowLimit = value;
                 RaisePropertyChanged(() => RowLimit);
+            }
+        }
+
+        public Visibility IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                if(_isLoading == value)
+                    return;
+                _isLoading = value;
+                RaisePropertyChanged(() => IsLoading);
             }
         }
 
@@ -183,6 +197,8 @@ namespace MainModule.ViewModel
 
         public ICommand RunQueryCommand => _runQueryCommand ?? (_runQueryCommand = new DelegateCommand(OnRunQuery));
 
+        public ICommand CleanItemsCommand => _cleanItemsCommand ?? (_cleanItemsCommand = new DelegateCommand(OnCleanItems));
+
         public ObservableCollection<ItemViewModel> Items
         {
             get { return _items; }
@@ -207,6 +223,7 @@ namespace MainModule.ViewModel
 
         private void InitializeSettings()
         {
+            IsLoading = Visibility.Hidden;
             _queryRunnerManager = new QueryRunnerManager();
             SubscribeToManagerEvents();
             _items = new ObservableCollection<ItemViewModel>();
@@ -240,8 +257,23 @@ namespace MainModule.ViewModel
 
         private void OnRunQuery()
         {
-            var queryParameters = GetQueryParameters();
-            _queryRunnerManager.RunWorker(queryParameters);
+            Items.Clear();
+            IsLoading = Visibility.Visible;
+            try
+            {
+                var queryParameters = GetQueryParameters();
+                _queryRunnerManager.RunWorker(queryParameters);
+            }
+            finally
+            {
+                IsLoading = Visibility.Hidden;
+            }
+        }
+
+        private void OnCleanItems()
+        {
+            Items.Clear();
+            RaisePropertyChanged(() => Items);
         }
 
         private QueryParameters GetQueryParameters()
