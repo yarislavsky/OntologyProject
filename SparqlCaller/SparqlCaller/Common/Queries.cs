@@ -121,7 +121,7 @@ namespace SparqlCaller.Common
                                                                           ?movie rdf:type movie:film;
     		                                                                rdfs:label ?label.";
 
-            public const string SelectBaseDbPedia = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName
+            public const string SelectBaseDbPedia = @"SELECT ?label ?genreName ?date ?writerName ?directorName ?countryName ?duration ?budget
                                                                         WHERE { SERVICE <http://dbpedia.org/sparql> { 
                                                                           ?movie rdf:type dbo:Film;
     		                                                                rdfs:label ?label.
@@ -184,6 +184,12 @@ namespace SparqlCaller.Common
                                                                     ";
 
             public const string CountryFilterDbPedia = @"";
+
+
+            public const string DurationFilterDbPedia = @"               ?movie <http://dbpedia.org/ontology/Work/runtime> ?duration.
+                                                                            ";
+
+            public const string BudgetFilterDbPedia = @"                ?movie dbo:budget ?budget.";
         }
     }
 }

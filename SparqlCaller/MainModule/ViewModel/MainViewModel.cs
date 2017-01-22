@@ -243,7 +243,6 @@ namespace MainModule.ViewModel
         private void ManagerProcessStarted()
         {
             DXSplashScreen.Show<SplashScreenViewMain>();
-            //SplashScreenService.SetSplashScreenState("Retrieving data...");
         }
 
         private void ManagerProcessFinished(IEnumerable<ItemViewModel> obj)

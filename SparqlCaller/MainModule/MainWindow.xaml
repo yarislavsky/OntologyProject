@@ -32,7 +32,7 @@
                                            Command="{Binding RunQueryCommand}"/>
                         <dxb:BarItemSeparator/>
                         <dxr:BarButtonGroup x:Name="editorGroup" RibbonStyle="SmallWithText" >
-                            <dxb:BarEditItem BarEditItem="{Binding RowLimit}" x:Name="editItem"  Content="Items Count"   EditWidth="80">
+                            <dxb:BarEditItem EditValue="{Binding RowLimit}" x:Name="editItem"  Content="Items Count"   EditWidth="80">
                                 <dxb:BarEditItem.EditSettings>
                                     <dxe:ComboBoxEditSettings Name="DeskList" IsTextEditable="False" AutoComplete="True" ItemsSource="{Binding Path=(dxb:BarEditItem.BarEditItem).DataContext.AllRowLimits,RelativeSource={RelativeSource Self}}"/>
                                 </dxb:BarEditItem.EditSettings>
@@ -186,6 +186,8 @@
                     <dxg:GridColumn Header="Writer" FieldName="Writer"/>
                     <dxg:GridColumn Header="Director" FieldName="Director"/>
                     <dxg:GridColumn Header="Date" FieldName="Date"/>
+                    <dxg:GridColumn Header="Duration (min)" FieldName="Duration"/>
+                    <dxg:GridColumn Header="Budget ($)" FieldName="Budget"/>
                 </dxg:GridControl.Columns>
                 <dxg:GridControl.View>
                     <!-- <dxg:CardView AllowEditing="False" NavigationStyle="Cell" >
@@ -204,10 +206,11 @@
                             <DataTemplate>
                                 <TextBlock>
                                     <Run Text="{Binding Data.Name}"/>
-                                    <Run Text="{Binding Data.Genre}"/>
+                                    <!--Зачем это всё тут?-->
+                                    <!--<Run Text="{Binding Data.Genre}"/>
                                     <Run Text="{Binding Data.Writer}"/>
                                     <Run Text="{Binding Data.Director}"/>
-                                    <Run Text="{Binding Data.Date}"/>
+                                    <Run Text="{Binding Data.Date}"/>-->
                                 </TextBlock>
                             </DataTemplate>
                         </dxg:CardView.CardHeaderTemplate>

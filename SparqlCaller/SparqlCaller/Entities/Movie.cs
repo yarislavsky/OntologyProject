@@ -20,6 +20,9 @@ namespace SparqlCaller.Entities
         public string Director { get; set; }
         public string Writer { get; set; }
         public string ImgUrl { get; set; }
+        public double Duration { get; set; }
+
+        public double Budget { get; set; }
 
         public IEntity FillEntity(SparqlResult sResult)
         {
@@ -34,7 +37,8 @@ namespace SparqlCaller.Entities
             DateTime = ConversionUtil.ConvertToDateTime(sResult.GetValue("date"));
             Director = sResult.GetValue("directorName").RemoveLanguageLabel();
             Writer = sResult.GetValue("writerName").RemoveLanguageLabel();
-
+            Duration = ConversionUtil.ConvertToDouble(sResult.GetValue("duration"));
+            Budget = ConversionUtil.ConvertToDouble(sResult.GetValue("budget"));
             // TODO get img url from response
             ImgUrl = string.Empty;
             

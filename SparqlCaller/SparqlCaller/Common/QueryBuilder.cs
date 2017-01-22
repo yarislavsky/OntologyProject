@@ -45,10 +45,19 @@ namespace SparqlCaller.Common
                     throw new NotImplementedException();
             }
 
+            filterString = AddNonFilteredData(filterString);
+
             var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } "
                             + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
 
             return mainQuery;
+        }
+
+        private static string AddNonFilteredData(string filterString)
+        {
+            filterString += GetFormattedSnippedWithoutFilters(Queries.FilterSnippets.DurationFilterDbPedia);
+            filterString += GetFormattedSnippedWithoutFilters(Queries.FilterSnippets.BudgetFilterDbPedia);
+            return filterString;
         }
 
         private static string CreateFilterQuery(Dictionary<FilterType, string> dictionary, FilterType filterType, string countryFilter, string directorFilter, string dateFilter, string writerFilter, string genreFilter)
@@ -89,6 +98,12 @@ namespace SparqlCaller.Common
             {
                 snipped = string.Format(stringToFormat, filterValue);
             }
+            return snipped;
+        }
+
+        private static string GetFormattedSnippedWithoutFilters(string stringToFormat)
+        {
+            var snipped = "OPTIONAL {" + stringToFormat + "}";
             return snipped;
         }
 

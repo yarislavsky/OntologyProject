@@ -15,6 +15,8 @@ namespace MainModule.ViewModel
         private string _date;
         private string _director;
         private string _imgUrl;
+        private double _duration;
+        private double _budget;
 
         #endregion
 
@@ -32,6 +34,8 @@ namespace MainModule.ViewModel
                 ? Defaults.DefaultImage
                 : movie.ImgUrl;
             Date = movie.DateTime?.ToShortDateString() ?? string.Empty;
+            Duration = movie.Duration;
+            Budget = movie.Budget;
         }
 
         #endregion
@@ -106,6 +110,30 @@ namespace MainModule.ViewModel
                 if (_director == value)
                     return;
                 _director = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Duration
+        {
+            get { return _duration; }
+            set
+            {
+                if(_duration == value)
+                    return;
+                _duration = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Budget
+        {
+            get { return _budget; }
+            set
+            {
+                if(_budget == value)
+                    return;
+                _budget = value;
                 OnPropertyChanged();
             }
         }
