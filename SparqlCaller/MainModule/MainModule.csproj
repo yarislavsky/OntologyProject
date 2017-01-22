@@ -102,12 +102,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Defaults.cs" />
+    <Compile Include="DXSplashScreen\SplashScreenViewMain.xaml.cs">
+      <DependentUpon>SplashScreenViewMain.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Managers\QueryImplemantationManager.cs" />
     <Compile Include="Managers\QueryRunnerManager.cs" />
     <Compile Include="Models\QueryParameters.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="DXSplashScreen\SplashScreenViewMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,6 +163,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="DXSplashScreen\Image.png" />
+    <Resource Include="DXSplashScreen\Logo.png" />
     <Content Include="Resource\NotFound.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

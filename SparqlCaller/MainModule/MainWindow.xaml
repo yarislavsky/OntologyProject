@@ -41,14 +41,12 @@
 
 
                         <dxb:BarItemSeparator/>
-    <dxb:BarButtonItem x:Name="cleanItems" Content="Clean results"
+                        <dxb:BarButtonItem x:Name="cleanItems" Content="Clear results"
                        Glyph="{dx:DXImage Image=Delete_16x16.png}"
                 LargeGlyph="{dx:DXImage Image=Delete_32x32.png}"
                        Command="{Binding CleanItemsCommand}"/>
 
                         <dxb:BarItemSeparator/>
-                        <dxb:BarButtonItem x:Name="saveAsItem" Content="Save As"
-                 LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
+using DevExpress.Xpf.Core;
 using DevExpress.XtraPrinting.Export.Imaging;
 using MainModule.Managers;
 using MainModule.Models;
@@ -241,13 +242,13 @@ namespace MainModule.ViewModel
 
         private void ManagerProcessStarted()
         {
-            //SplashScreenService.ShowSplashScreen();
+            DXSplashScreen.Show<SplashScreenViewMain>();
             //SplashScreenService.SetSplashScreenState("Retrieving data...");
         }
 
         private void ManagerProcessFinished(IEnumerable<ItemViewModel> obj)
         {
-            //SplashScreenService.HideSplashScreen();
+            DXSplashScreen.Close();
             var itemList = obj.ToList();
             foreach (var itemViewModel in itemList)
             {
