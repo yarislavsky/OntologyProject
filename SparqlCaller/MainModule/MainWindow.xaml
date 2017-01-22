@@ -26,23 +26,20 @@
             </dxr:RibbonControl.ToolbarItems>
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage Caption="Home">
-                    <dxr:RibbonPageGroup Caption="File">
+                    <dxr:RibbonPageGroup Caption="Processing queries">
                         <dxb:BarButtonItem x:Name="newItem" Content="Run Query"
                                 Glyph="{dx:DXImage Image=Play_16x16.png}" LargeGlyph="{dx:DXImage Image=Play_32x32.png}"
                                            Command="{Binding RunQueryCommand}"/>
                         <dxb:BarItemSeparator/>
-                   <!--     <dxr:BarButtonGroup x:Name="editorGroup">
-                           <dxb:BarEditItem x:Name="editItem"
-                                EditSettings="{dxe:ComboBoxSettings }"
-                                EditWidth="80"
-                                InputBindings="{Binding AllRowLimits}"
-                                Content="{Binding RowLimit}" />
-                        </dxr:BarButtonGroup> -->
-                        <dxr:BarButtonGroup x:Name="alignmentGroup">
-                            <dxb:BarCheckItem x:Name="leftCheckItem" Content="Align Left" Glyph="{dx:DXImage Image=AlignLeft_16x16.png}" GroupIndex="1" IsChecked="True"/>
-                            <dxb:BarCheckItem x:Name="rightCheckItem" Content="Align Right" Glyph="{dx:DXImage Image=AlignRight_16x16.png}" GroupIndex="1"/>
-                            <dxb:BarCheckItem x:Name="justifyCheckItem" Content="Align Justify" Glyph="{dx:DXImage Image=AlignJustify_16x16.png}" GroupIndex="1"/>
+                        <dxr:BarButtonGroup x:Name="editorGroup" RibbonStyle="SmallWithText" >
+                            <dxb:BarEditItem BarEditItem="{Binding RowLimit}" x:Name="editItem"  Content="Items Count"   EditWidth="80">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:ComboBoxEditSettings Name="DeskList" IsTextEditable="False" AutoComplete="True" ItemsSource="{Binding Path=(dxb:BarEditItem.BarEditItem).DataContext.AllRowLimits,RelativeSource={RelativeSource Self}}"/>
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
                         </dxr:BarButtonGroup>
+
+
                         <dxb:BarItemSeparator/>
                         <dxb:BarButtonItem x:Name="saveAsItem" Content="Save As" LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
                     </dxr:RibbonPageGroup>
@@ -70,16 +67,6 @@
                 </dx:DXExpander.Style>
                 <GroupBox Header="Book Filters" Margin="5">
                     <StackPanel>
-
-                        <Label>Items limit</Label>
-                        <ComboBox SelectedItem="{Binding RowLimit}" ItemsSource="{Binding AllRowLimits}">
-                            <ComboBox.Style>
-                                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource CommonGroupStyle}">
-                                </Style>
-                            </ComboBox.Style>
-                        </ComboBox>
-                        <Label></Label>
-
                         <CheckBox x:Name="GenreCheck" IsChecked="{Binding IsGenreChecked}" Content="Genre"/>
                             <ComboBox SelectedItem="{Binding SelectedGenre}" ItemsSource="{Binding AllGenres}">
                             <ComboBox.Style>

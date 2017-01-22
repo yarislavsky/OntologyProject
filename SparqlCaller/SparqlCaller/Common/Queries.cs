@@ -138,7 +138,7 @@ namespace SparqlCaller.Common
 
             public const string GenreFilterDbPedia = @"?movie dbp:genre ?genre.
      			                                                                ?genre rdfs:label ?genreName.
-                                                                       FILTER(REGEX(?genreName,'{0}','i')).                
+                                                                       FILTER(REGEX(?genreName,'{0}','i')).                                     
                                                                    ";
 
             public const string DateFilter = @"

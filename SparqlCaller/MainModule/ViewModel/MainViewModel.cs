@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using DevExpress.Mvvm;
+using DevExpress.Mvvm.POCO;
 using DevExpress.XtraPrinting.Export.Imaging;
 using MainModule.Managers;
 using MainModule.Models;
@@ -214,12 +215,22 @@ namespace MainModule.ViewModel
         private void SubscribeToManagerEvents()
         {
             if (_queryRunnerManager != null)
+            {
                 _queryRunnerManager.ProcessFinished += ManagerProcessFinished;
+                _queryRunnerManager.ProcessStarted += ManagerProcessStarted;
+            }
 
+        }
+
+        private void ManagerProcessStarted()
+        {
+            //SplashScreenService.ShowSplashScreen();
+            //SplashScreenService.SetSplashScreenState("Retrieving data...");
         }
 
         private void ManagerProcessFinished(IEnumerable<ItemViewModel> obj)
         {
+            //SplashScreenService.HideSplashScreen();
             var itemList = obj.ToList();
             foreach (var itemViewModel in itemList)
             {

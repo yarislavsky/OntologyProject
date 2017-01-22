@@ -19,13 +19,15 @@ namespace MainModule.Managers
             SubscribeToBackgroundWorkerEvents();
         }
 
-        public event Action<IEnumerable<ItemViewModel>> ProcessFinished; 
+        public event Action<IEnumerable<ItemViewModel>> ProcessFinished;
+        public event Action ProcessStarted;
 
         public void RunWorker(QueryParameters queryParameters)
         {
             if(_backgroundWorker.IsBusy)
                 return;
 
+            ProcessStarted?.Invoke();
             _backgroundWorker.RunWorkerAsync(queryParameters);
         }
         

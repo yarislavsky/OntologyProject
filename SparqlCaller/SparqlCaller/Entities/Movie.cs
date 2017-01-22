@@ -23,6 +23,9 @@ namespace SparqlCaller.Entities
 
         public IEntity FillEntity(SparqlResult sResult)
         {
+            if (!sResult.GetValue("genreName").IsEnglish())
+                return null;
+
             Title = sResult.GetValue("label").RemoveLanguageLabel();
             Link = sResult.GetValue("film");
             Subject = sResult.GetValue("subject");
