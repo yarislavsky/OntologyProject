@@ -44,7 +44,14 @@
                             <dxb:BarCheckItem x:Name="justifyCheckItem" Content="Align Justify" Glyph="{dx:DXImage Image=AlignJustify_16x16.png}" GroupIndex="1"/>
                         </dxr:BarButtonGroup>
                         <dxb:BarItemSeparator/>
-                        <dxb:BarButtonItem x:Name="saveAsItem" Content="Save As" LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
+    <dxb:BarButtonItem x:Name="cleanItems" Content="Clean results"
+                       Glyph="{dx:DXImage Image=Delete_16x16.png}"
+                LargeGlyph="{dx:DXImage Image=Delete_32x32.png}"
+                       Command="{Binding CleanItemsCommand}"/>
+
+                        <dxb:BarItemSeparator/>
+                        <dxb:BarButtonItem x:Name="saveAsItem" Content="Save As"
+                 LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
@@ -92,7 +99,7 @@
                                 </Style>
                             </ComboBox.Style>
                             </ComboBox>
-                        
+
                         <CheckBox Content="Date" x:Name="DateCheck" IsChecked="{Binding IsDateChecked}"/>
                         <dxe:DateEdit MaskUseAsDisplayFormat="True" Mask ="yyyy" Text="{Binding Date}">
                             <dxe:DateEdit.StyleSettings>
@@ -108,7 +115,7 @@
                                 </Style>
                             </dxe:DateEdit.Style>
                         </dxe:DateEdit>
-                        
+
                         <CheckBox Content="Writer" x:Name="WriterCheck" IsChecked="{Binding IsWriterChecked}"/>
                         <TextBox Text="{Binding WriterName}">
                             <TextBox.Style>
@@ -146,8 +153,8 @@
                             </TextBox.Style>
                         </TextBox>
                     </StackPanel>
-                    
-                    
+
+
                 </GroupBox>
             </dx:DXExpander>
             <ToggleButton x:Name="ExpandButton" Width="30" IsChecked="True" Grid.Column="1" HorizontalContentAlignment="Left">
@@ -162,8 +169,8 @@
                     </Style>
                 </ToggleButton.Style>
             </ToggleButton>
-<!--
-            <dx:WaitIndicator Content="Loading..." >
+
+            <dx:WaitIndicator Width="200" Height="100" Grid.Column="2" Content="Loading..."  Visibility="{Binding IsLoading}" >
                 <dx:WaitIndicator.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -172,7 +179,7 @@
                     </DataTemplate>
                 </dx:WaitIndicator.ContentTemplate>
             </dx:WaitIndicator>
--->
+
             <dxg:GridControl Grid.Column="2" ItemsSource="{Binding Items}">
                 <dxg:GridControl.Columns>
 
