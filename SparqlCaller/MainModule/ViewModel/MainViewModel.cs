@@ -253,6 +253,10 @@ namespace MainModule.ViewModel
             {
                 Items.Add(itemViewModel);
             }
+            if (Items.Count == 0)
+            {
+                MessageBox.Show("No items found!");
+            }
         }
 
         private void OnRunQuery()
@@ -263,6 +267,10 @@ namespace MainModule.ViewModel
             {
                 var queryParameters = GetQueryParameters();
                 _queryRunnerManager.RunWorker(queryParameters);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error while query execition: {ex.Message}.");
             }
             finally
             {

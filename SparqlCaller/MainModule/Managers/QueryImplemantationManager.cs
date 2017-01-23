@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 using MainModule.Models;
 using MainModule.ViewModel;
@@ -19,8 +20,8 @@ namespace MainModule.Managers
             FilterType filterType = 0;
             if (queryParameters.IsCountryChecked)
                 filterType |= FilterType.Country;
-            if (queryParameters.IsDateChecked)
-                filterType |= FilterType.Date;
+            //if (queryParameters.IsDateChecked)
+            //    filterType |= FilterType.Date;
             if (queryParameters.IsDirectorChecked)
                 filterType |= FilterType.Director;
             if (queryParameters.IsGenreChecked)
@@ -37,12 +38,17 @@ namespace MainModule.Managers
                         , queryParameters.DirectorName
                         , queryParameters.Date
                         , queryParameters.WriterName
-                        , queryParameters.Genre)).ToList();
-
+                        , queryParameters.Genre))
+                        .Where(ent => (!queryParameters.IsDateChecked || (ent as Movie).DateTime.HasValue && (ent as Movie).DateTime.Value.Date.Year == DateTime.Parse(queryParameters.Date).Date.Year))
+                        .ToList();
+            
             var movieList = new List<ItemViewModel>();
+            int index = 0;
             foreach (var movie in allMovies)
             {
-                movieList.Add(new ItemViewModel(movie as Movie));
+                if ((!queryParameters.RowLimit.HasValue || index++ < queryParameters.RowLimit.Value ) && !string.IsNullOrEmpty((movie as Movie).Title))
+                    movieList.Add(new ItemViewModel(movie as Movie));
+                else break;
             }
             _movieList = movieList;
         }

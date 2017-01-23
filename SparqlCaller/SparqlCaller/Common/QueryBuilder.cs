@@ -45,10 +45,11 @@ namespace SparqlCaller.Common
                     throw new NotImplementedException();
             }
 
-            filterString = AddNonFilteredData(filterString);
+                 filterString = AddNonFilteredData(filterString);
 
             var mainQuery = Queries.Templates.AllPrefixes + selectionBase + filterString + "} } "
-                            + " GROUP BY ?label " + (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
+                            + " GROUP BY ?label ";
+                            //+ (rowLimit.HasValue ? $"LIMIT {rowLimit.Value}" : "");
 
             return mainQuery;
         }

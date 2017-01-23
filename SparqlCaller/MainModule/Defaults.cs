@@ -17,18 +17,18 @@ namespace MainModule
 
         public static readonly Dictionary<string, string> AllGenres = new Dictionary<string, string>
         {
-            // TODO replace values with to dbpedia genres
-            {"Action", ""},
-            {"Adventure", ""},
-            {"Comedy", ""},
-            {"Crime", ""},
-            {"Drama", ""},
-            {"Fantasy", ""},
-            {"Historical", ""},
-            {"Horror", ""},
-            {"Science fiction", ""},
-            {"Thriller", ""},
-            {"Western", ""},
+            {"Action", "action"},
+            {"Adventure", "adventur"},
+            {"Comedy", "comed"},
+            {"Crime", "crime"},
+            {"Drama", "drama"},
+            {"Fantasy", "fantas"},
+            {"Historical", "histor"},
+            {"Horror", "horror"},
+            {"Musical", "music"},
+            {"Science fiction", "fiction"},
+            {"Thriller", "thril"},
+            {"Western", "western"},
         };
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MainModule.Models
+﻿using System;
+
+namespace MainModule.Models
 {
     public class QueryParameters
     {

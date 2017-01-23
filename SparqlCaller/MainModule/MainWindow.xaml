@@ -6,7 +6,7 @@
         xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-        Icon="Resource/1485129028_filmreel.png"                    
+        Icon="C:\Code\OntologyProject\SparqlCaller\MainModule\Resource\1485129028_filmreel.png"                    
         Title="SPARQL movie explorer" Height="450" Width="725">
     <Grid DataContext="{Binding Main, Source={StaticResource Locator}}">
         <Grid.Resources>
@@ -201,11 +201,6 @@
                             <DataTemplate>
                                 <TextBlock>
                                     <Run Text="{Binding Data.Name}"/>
-                                    <!--Зачем это всё тут?-->
-                                    <!--<Run Text="{Binding Data.Genre}"/>
-                                    <Run Text="{Binding Data.Writer}"/>
-                                    <Run Text="{Binding Data.Director}"/>
-                                    <Run Text="{Binding Data.Date}"/>-->
                                 </TextBlock>
                             </DataTemplate>
                         </dxg:CardView.CardHeaderTemplate>

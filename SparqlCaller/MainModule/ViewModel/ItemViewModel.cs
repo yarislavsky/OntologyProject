@@ -15,27 +15,32 @@ namespace MainModule.ViewModel
         private string _date;
         private string _director;
         private string _imgUrl;
-        private double _duration;
-        private double _budget;
+        private string _duration;
+        private string _budget;
 
         #endregion
 
         #region constructors
+
+        private string ReplaceNanValue(string value)
+        {
+            return value == "NaN" ||string.IsNullOrEmpty(value) ? "No information" : value;
+        }
 
         public ItemViewModel(Movie movie)
         {
             if(movie == null)
                 throw new ArgumentNullException(nameof(movie));
             Name = movie.Title;
-            Genre = movie.Genre;
-            Writer = movie.Writer;
-            Director = movie.Director;
+            Genre = ReplaceNanValue(movie.Genre);
+            Writer = ReplaceNanValue(movie.Writer);
+            Director = ReplaceNanValue(movie.Director);
             ImgUrl = string.IsNullOrEmpty(movie.ImgUrl)
                 ? Defaults.DefaultImage
                 : movie.ImgUrl;
-            Date = movie.DateTime?.Year.ToString() ?? "NaN";
-            Duration = movie.Duration;
-            Budget = movie.Budget;
+            Date = ReplaceNanValue(movie.DateTime?.Year.ToString() ?? "NaN");
+            Duration = ReplaceNanValue(movie.Duration.ToString());
+            Budget = ReplaceNanValue(movie.Budget.ToString());
         }
 
         #endregion
@@ -114,7 +119,7 @@ namespace MainModule.ViewModel
             }
         }
 
-        public double Duration
+        public string Duration
         {
             get { return _duration; }
             set
@@ -126,7 +131,7 @@ namespace MainModule.ViewModel
             }
         }
 
-        public double Budget
+        public string Budget
         {
             get { return _budget; }
             set
